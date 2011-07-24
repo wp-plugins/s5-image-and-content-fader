@@ -1,5 +1,5 @@
 === Shape 5 Image and Content Fader ===
-Contributors: kondrik, shape5
+Contributors: shape5
 Donate link: http://ttsd.us/lblJVF
 Tags: Slideshow, Image Rotator, Widget, Content Rotator, Media Show
 Requires at least: 3.0
