@@ -46,13 +46,15 @@ Q: How many slides can I have?
 
 A: Currently up to 10 slides are supported.  In future updates we plan to remove all limits.
 
---------
+
+
 
 Q: Help! Something's not working right!
 
-A: Please submit any support requests or but reports in our forum at: http://s5co.us/icfhelp (NOTE: You will need to create a free account and log in to access the forum)
+A: Please submit any support requests or bug reports in our forum at: http://s5co.us/icfhelp (NOTE: You will need to create a free account and log in to access the forum)
 
---------
+
+
 
 Q: Why do I have to log in to get support, isn't the plugin free?
 
