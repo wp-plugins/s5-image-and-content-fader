@@ -1,6 +1,6 @@
 === Shape 5 Image and Content Fader ===
 Contributors: shape5
-Donate link: http://ttsd.us/lblJVF
+Donate link: http://s5co.us/s5donate
 Tags: Slideshow, Image Rotator, Widget, Content Rotator, Media Show
 Requires at least: 3.0
 Tested up to: 3.2.x
@@ -10,7 +10,7 @@ The Shape5 Image and Content Fader provides a widget-based slideshow of images w
 
 == Description ==
 
-Live Demo Here: http://ttsd.us/s5ICF
+Live Demo Here: http://shape5.com/demo/index.php?wp/basics/
 
 This widget allows you publish your own content into each slide transition and for multiple slide transition effects,
 navigation arrows and also a drop down gallery tab that allows you to select a slide via a thumbnail. 
@@ -45,4 +45,16 @@ Features at a glance:
 Q: How many slides can I have?
 
 A: Currently up to 10 slides are supported.  In future updates we plan to remove all limits.
+
+--------
+
+Q: Help! Something's not working right!
+
+A: Please submit any support requests or but reports in our forum at: http://s5co.us/icfhelp (NOTE: You will need to create a free account and log in to access the forum)
+
+--------
+
+Q: Why do I have to log in to get support, isn't the plugin free?
+
+A: Support is free, but we require a (free) signup to view and post on our forum.  This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
 
