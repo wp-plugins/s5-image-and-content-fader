@@ -58,5 +58,4 @@ A: Please submit any support requests or bug reports in our forum at: http://s5c
 
 Q: Why do I have to log in to get support, isn't the plugin free?
 
-A: Support is free, but we require a (free) signup to view and post on our forum.  This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
-
+A: Support is free, but we require a (free) signup here http://www.shape5.com/join-now.html to view and post on our forum. This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
