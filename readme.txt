@@ -47,6 +47,11 @@ Q: How many slides can I have?
 A: Currently up to 10 slides are supported.  In future updates we plan to remove all limits.
 
 
+Q: I'm getting an error on the widget admin that says "Warning: simplexml_load_file() [function.simplexml-load-file]: .....wp-content/plugins/s5-image-and-content-fader/wid_opts.xml:1: parser error : Space required after the Public Identifier in..."
+
+
+A: If you've restricted site access to a single IP, you may need to add your server's IP to the access list.  The plugin uses an XML parser to generate the options list in the widget admin, and the parser needs to be able to access to the XML from your server.
+
 
 
 Q: Help! Something's not working right!
