@@ -6,7 +6,7 @@
 
 	<param name="width" type="text" default="482px" label="Width" description="Enter the width of the image fader." />
 
-	<param name="background" type="text" default="" label="Background Color (leave blank for none) ex:FFFFFF" description="Enter the background color. Leave blank for none." />
+	<!--param name="background" type="text" default="" label="Background Color (leave blank for none) ex:FFFFFF" description="Enter the background color. Leave blank for none." /-->
 
 	<param name="jseffect" type="radio" default="fade" label="Choose your effect" description="Choose the effect you would like to happen between image transitions.  Mootools versions only, S5 effects will just fade in and out">
 		<option value="fade">Fade</option>
