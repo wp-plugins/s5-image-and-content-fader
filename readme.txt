@@ -1,7 +1,7 @@
 === Shape 5 Image and Content Fader ===
 Contributors: shape5 
 Donate link:http://s5co.us/s5donate
-Tags: Slideshow, Image Rotator, Widget, Content Rotator,
+Tags: Slideshow, Image Rotator, Widget, Content Rotator, Media Show
 Requires at least: 3.0
 Tested up to: 3.3.x
 Stable tag: trunk
@@ -21,10 +21,10 @@ Features at a glance:
 
 *       NEW horizontal sliding transition
 *       Choose between 4 slide transitions:
-        1.     Fade,
-	    2.     Continuous Horizontal,
-        3.     Fade Slide Left,
-        4.     Continuous Vertical
+1.          Fade,
+2.          Continuous Horizontal,
+3.          Fade Slide Left,
+4.          Continuous Vertical
 *       Specify height and width of widget
 *       Includes a gallery tab drop down to show all images
 *       Each image slide can have its own hyperlink
@@ -65,6 +65,6 @@ Q: Why do I have to log in to get support, isn\'t the plugin free?
   
 A: Support is free, but we require a (free) signup here http://www.shape5.com/join-now.html to view and post on our forum. This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
 == Changelog ==
-
 1.2
+
  - Fixed an issue where the XML file for settings wasn\'t loading properly because it was being accessed using a URL rather than the direct path.
