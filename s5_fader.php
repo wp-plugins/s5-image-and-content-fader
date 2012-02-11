@@ -3,7 +3,7 @@
 Plugin Name: S5 Image And Content Fader
 Plugin URI: http://s5co.us/ICFDetails
 Description: The S5 Image and Content Fader is an advanced version of the S5 Image Fader. This tool gives you all the features of the Image Fader plus the ability to add content to each slide with a nice transition effect. Each slide's content has it's own configurable settings such as colors, sizes, opacity, and more! Best of all it's free!
-Version: 1.2
+Version: 1.2.1
 Author: Shape 5 LLC
 Author URI: http://www.shape5.com
 License: GPL2
@@ -36,7 +36,8 @@ class S5_ICFader extends WP_Widget {
 
     /** constructor */
     function S5_ICFader() {
-		$this->plugin_dir = plugin_dir_path( __FILE__ );
+		$this->plugin_dir = plugins_url( '/' , __FILE__ );
+		$this->xml_dir = plugin_dir_path( __FILE__ );
        parent::WP_Widget(false, $name = 'Shape5 Image & Content Fader');
     }
 

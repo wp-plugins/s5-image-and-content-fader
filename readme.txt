@@ -67,6 +67,10 @@ Q: Why do I have to log in to get support, isn't the plugin free?
   
 A: Support is free, but we require a (free) signup here http://www.shape5.com/join-now.html to view and post on our forum. This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
 == Changelog ==
+1.2.1
+
+ - Fixed a bug from 1.2 that was causing incorrect URLs for necessary resources.
+
 1.2
 
  - Fixed an issue where the XML file for settings wasn't loading properly because it was being accessed using a URL rather than the direct path.

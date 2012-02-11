@@ -1,6 +1,6 @@
 <?php
 
-  $xml = $this->plugin_dir.'wid_opts.xml';
+  $xml = $this->xml_dir.'wid_opts.xml';
   $xml = simplexml_load_file($xml);
 
   foreach($xml->param as $option){
