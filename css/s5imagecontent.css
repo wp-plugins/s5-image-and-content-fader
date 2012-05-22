@@ -357,3 +357,16 @@
 	font-weight: normal;
 	color: #aaa;
 }
+.jdGallery .carousel .carouselInner .active { 
+opacity: .9 !important;
+
+-moz-opacity: .9 !important; 
+-khtml-opacity: 0.9 !important;
+
+filter:alpha(opacity=90) !important;}
+
+
+.jdGallery .slideElement {}
+ 
+
+.jdGallery .slideElement.active {} 
