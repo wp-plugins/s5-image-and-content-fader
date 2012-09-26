@@ -189,7 +189,7 @@ echo '<script language="javascript" type="text/javascript">var s5_hidetext = "'.
 					<p style="text-shadow:1px 1px #000000;"><?php echo $picture10text_s5_iacf?></p>
 					<a href="<?php if ($picture10link_s5_iacf != "") {echo $picture10link_s5_iacf;} else { echo "javascript:;";}?>" title="open image" class="open"></a>
 					<img src="<?php echo $picture10_s5_iacf ?>" alt="<?php echo $title10 ?>" class="full" />
-					<img src="<?php echo $picture10_s5_iacf ?>" alt="<?php echo $title10 ?>" class="thumbnail" />
+					<img src="<?php echo $picture10_s5_iacf ?> alt="<?php echo $title10 ?>" class="thumbnail" />
 				</div>
 				<?php } ?>
 			</div>

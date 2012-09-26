@@ -183,7 +183,7 @@ var gallery = {
 			if ((options.embedLinks) | (options.useReMooz))
 				elementDict.extend({
 					link: el.getElement(options.linkSelector).href||false,
-					linkTitle: el.getElement(options.linkSelector).title||false,
+					//linkTitle: el.getElement(options.linkSelector).title||false,
 					linkTarget: el.getElement(options.linkSelector).getProperty('target')||false
 				});
 			if ((!options.useThumbGenerator) && (options.showCarousel))
@@ -348,6 +348,25 @@ var gallery = {
 			this.timer = this.nextItem.delay(this.options.delay, this);
 	},
 	doSlideShow: function(position) {
+   // start jv
+        if(this.carousel){
+            var thumbs = this.carousel.element.getElements('.thumbnail');
+            thumbs.each(function(el){
+                if(el.hasClass('active')) el.removeClass('active');
+            });
+            thumbs[this.currentIter].addClass('active');
+            
+        }
+        var images = this.galleryElement.getElements('.slideElement');
+        if(images.length){
+            images.each(function(el){
+                if(el.hasClass('active')) el.removeClass('active');
+            });
+            images[this.currentIter].addClass('active');
+        }
+        //end jv
+	
+	
 		if (this.galleryInit == 1)
 		{
 			imgPreloader = new Image();
