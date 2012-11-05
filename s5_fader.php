@@ -37,9 +37,22 @@ class S5_ICFader extends WP_Widget {
     /** constructor */
     function S5_ICFader() {
 		$this->plugin_dir = plugins_url( '/' , __FILE__ );
+		$this->override_folder = 'mod_s5_image_and_content_fader';
 		$this->xml_dir = plugin_dir_path( __FILE__ );
        parent::WP_Widget(false, $name = 'Shape5 Image & Content Fader');
     }
+
+	/** Override detection**/
+	function check_override($filename){
+		$this->override_path = get_theme_root() . '/' . get_template().'/html/'.$this->override_folder;
+		$this->override_url = get_bloginfo('template_url').'/html/'.$this->override_folder;
+
+		if(file_exists($this->override_path.'/'.$filename)) $has_override = true;
+
+		if($has_override){ return $this->override_url.'/'.$filename;}
+		else{ return $this->plugin_dir.'/'.$filename;}
+	}
+
 
     /** @see WP_Widget::widget */
     function widget($args, $instance) {
