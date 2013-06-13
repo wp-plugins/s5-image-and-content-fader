@@ -2,8 +2,8 @@
 /*
 Plugin Name: S5 Image And Content Fader
 Plugin URI: http://s5co.us/ICFDetails
-Description: The S5 Image and Content Fader is an advanced version of the S5 Image Fader. This tool gives you all the features of the Image Fader plus the ability to add content to each slide with a nice transition effect. Each slide's content has it's own configurable settings such as colors, sizes, opacity, and more! Best of all it's free!
-Version: 1.2.3
+Description: The S5 Image and Content Fader is an advanced version of the S5 Image Fader. This tool gives you all the features of the Image Fader plus the ability to add content to each slide with a nice transition effect. Each slide's content has its own configurable settings such as colors, sizes, opacity, and more! Best of all it's free!
+Version: 3.0.1
 Author: Shape 5 LLC
 Author URI: http://www.shape5.com
 License: GPL2
@@ -46,16 +46,32 @@ class S5_ICFader extends WP_Widget {
 	function check_override($filename){
 		$this->override_path = get_theme_root() . '/' . get_template().'/html/'.$this->override_folder;
 		$this->override_url = get_bloginfo('template_url').'/html/'.$this->override_folder;
-
-		if(file_exists($this->override_path.'/'.$filename)) $has_override = true;
-
+		$has_override = file_exists($this->override_path.'/'.$filename)? true : false;
 		if($has_override){ return $this->override_url.'/'.$filename;}
 		else{ return $this->plugin_dir.'/'.$filename;}
+	}
+
+	function get($opt_name,$demo=false, $shortname=null){
+		if($shortname == null){$shortname = $opt_name;}
+		$$opt_name = isset($this->instance["$opt_name"])? $this->instance["$opt_name"] : null;
+		if($enable = '1' && $demo != false){
+			if(isset($_GET[$shortname])||(isset($_GET['reset']))){
+				if($_GET[$shortname] != 'default'){
+				$_SESSION[$shortname] = $_GET[$shortname];}
+				if(($_GET[$shortname] == 'default')||($_GET['reset']==1)){
+				unset($_SESSION[$shortname],$_GET[$shortname]);}
+				}
+			if(isset($_SESSION[$shortname])){
+				$$opt_name = $_SESSION[$shortname];}
+		}
+		if($$opt_name==" "){$$opt_name=null;}
+		return $$opt_name;
 	}
 
 
     /** @see WP_Widget::widget */
     function widget($args, $instance) {
+		$this->instance = $instance;
 		extract( $args );
 		require_once('params.php');
         $title = apply_filters('widget_title', $instance['title']);
@@ -96,7 +112,7 @@ class S5_ICFader extends WP_Widget {
 // register S5_ICFader widget
 add_action('widgets_init', create_function('', 'return register_widget("S5_ICFader");'));
 
-$moo_src = plugins_url( 'js/mootools124.js' , __FILE__ );
-wp_enqueue_script( 'mootools', $moo_src, '', '1.2.4' );
+//$moo_src = plugins_url( 'js/mootools124.js' , __FILE__ );
+//wp_enqueue_script( 'mootools', $moo_src, '', '1.2.4' );
 
 ?>

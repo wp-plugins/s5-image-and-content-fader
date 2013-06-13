@@ -10,7 +10,7 @@ The Shape5 Image and Content Fader provides a widget-based slideshow of images w
 
 == Description ==
 
-Live Demo Here: http://shape5.com/demo/index.php?wp/basics/
+Live Demo Here: http://shape5.com/demo/index.php?wp/corporate-response/
 
 This widget allows you publish your own content into each slide transition and for multiple slide transition effects,
 navigation arrows and also a drop down gallery tab that allows you to select a slide via a thumbnail.
@@ -68,6 +68,13 @@ Q: Why do I have to log in to get support, isn't the plugin free?
 A: Support is free, but we require a (free) signup here http://www.shape5.com/join-now.html to view and post on our forum. This allows us to assure a higher quality of support by preventing spam and holding users accountable for their posts.
 
 == Changelog ==
+
+3.0.1
+
+ - Complete Rewrite
+   - *NEW* Conversion using jQuery instead of Mootools
+   - Added responsive/fluid site support and settings
+
 1.2.3
 
  - Added automatic detection of override files for css and javascript when placed in correct subfolder of active theme.
