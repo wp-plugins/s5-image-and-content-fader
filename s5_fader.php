@@ -3,7 +3,7 @@
 Plugin Name: S5 Image And Content Fader
 Plugin URI: http://s5co.us/ICFDetails
 Description: The S5 Image and Content Fader is an advanced version of the S5 Image Fader. This tool gives you all the features of the Image Fader plus the ability to add content to each slide with a nice transition effect. Each slide's content has its own configurable settings such as colors, sizes, opacity, and more! Best of all it's free!
-Version: 3.0.1
+Version: 3.0.2
 Author: Shape 5 LLC
 Author URI: http://www.shape5.com
 License: GPL2
@@ -43,11 +43,13 @@ class S5_ICFader extends WP_Widget {
     }
 
 	/** Override detection**/
-	function check_override($filename){
+	function check_override($filename, $use_path=false){
 		$this->override_path = get_theme_root() . '/' . get_template().'/html/'.$this->override_folder;
 		$this->override_url = get_bloginfo('template_url').'/html/'.$this->override_folder;
 		$has_override = file_exists($this->override_path.'/'.$filename)? true : false;
-		if($has_override){ return $this->override_url.'/'.$filename;}
+		if($has_override && $use_path == false){ return $this->override_url.'/'.$filename;}
+		elseif($has_override && $use_path == true){ return $this->override_path.'/'.$filename;}
+		elseif(!$has_override && $use_path == true){ return $filename;}
 		else{ return $this->plugin_dir.'/'.$filename;}
 	}
 
@@ -82,7 +84,7 @@ class S5_ICFader extends WP_Widget {
                   }else{
 					//echo $before_title . $after_title;
 				  }?>
-                  <?php include_once('tmpl/default.php'); ?>
+                  <?php include_once($this->check_override('tmpl/default.php',true)); ?>
               <?php echo $after_widget; ?>
         <?php
     }
@@ -97,7 +99,7 @@ class S5_ICFader extends WP_Widget {
 
     /** @see WP_Widget::form */
     function form($instance) {
-        $title = esc_attr($instance['title']);
+        $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$this->wid_instance = $instance;
         ?>
          <p>

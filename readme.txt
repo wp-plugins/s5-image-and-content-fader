@@ -3,7 +3,7 @@ Contributors: shape5, tristanrineer
 Donate link:http://s5co.us/s5donate
 Tags: Slideshow, Image Rotator, Widget, Content Rotator, Media Show
 Requires at least: 3.0
-Tested up to: 3.3.x
+Tested up to: 3.6.x
 Stable tag: trunk
 
 The Shape5 Image and Content Fader provides a widget-based slideshow of images with a per-image content overlay and gallery dropdown.
@@ -69,6 +69,10 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.0.2
+
+ - Extended override detection to include tmpl/default.php (Example: http://shape5.com/demo/index.php?wp/new_vision - info slide moved below image)
+ 
 3.0.1
 
  - Complete Rewrite
