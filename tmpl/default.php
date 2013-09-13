@@ -4,6 +4,7 @@
 Author: Shape 5 - Professional Template Community
 Available for download at www.shape5.com
 */
+
 ?>
 
 <?php if ($pretext_s5_iacf != "") { ?>
@@ -44,62 +45,126 @@ $iss_ie8_s5_iacf = "no";
 }
 
 $s5ic_url = $this->plugin_dir;
-echo '<script language="javascript" type="text/javascript">var s5_hidecar = "'.$s5_hidecar.'";</script>';
-echo '<script language="javascript" type="text/javascript">var s5_hidebut = "'.$s5_hidebut.'";</script>';
-echo '<script language="javascript" type="text/javascript">var s5_hidetext = "'.$s5_hidetext.'";</script>';
+echo '<script type="text/javascript">var s5_hidecar = "'.$s5_hidecar.'";</script>';
+echo '<script type="text/javascript">var s5_hidebut = "'.$s5_hidebut.'";</script>';
+echo '<script type="text/javascript">var s5_hidetext = "'.$s5_hidetext.'";</script>';
 
 ?>
 
-<?php if ($jslibrary = "mootools124") {
+<?php
 
-	echo '<script language="javascript" type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>';
+if ($jslibrary == "mootools") {
 
-	echo '<script src="'.$s5ic_url.'js/mootools124/jd.gallery.js" type="text/javascript"></script>';
-	echo '<script src="'.$s5ic_url.'js/mootools124/jd.gallery.transitions.js" type="text/javascript"></script>';
+	if(true){
+	$template_vertex = "no";
+	if(file_exists(get_theme_root() . '/' . get_template().'/vertex')) {
+	$template_vertex = "yes";
+	}
+		print('<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>');
+		if($template_vertex == "no"){ ?>
+		<script type="text/javascript">//<![CDATA[
+		if(jQuery.easing.easeOutExpo==undefined){
+		document.write('<script src="<?php echo $this->check_override('js/jquery-ui.min.js'); ?>"><\/script>');
+		}
+		//]]></script>
+		<script type="text/javascript">jQuery.noConflict();</script>
+		<?php }
+		print('<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>');
+		print('<script src="'.$this->check_override('js/jd.gallery.jquery.js').'" type="text/javascript"></script>');
+		print('<script src="'.$this->check_override('js/jd.gallery.transitions.jquery.js').'" type="text/javascript"></script>');
+	?>
+				<script type="text/javascript">//<![CDATA[
+		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css'); ?>" rel="stylesheet" type="text/css" media="screen" />');
+	//]]></script>
 
-	define('S5_ICF_head_echoes',$this->head_echoes);
-
-?>
 
 
-	<script type="text/javascript">//<![CDATA[
-    document.write('<link href="<?php echo $s5ic_url;?>css/s5imagecontent.css" rel="stylesheet" type="text/css" media="screen" />');
-//]]></script>
+			<script type="text/javascript">
 
+				function s5_icfstartGallery() {
+				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
+				window.myGallery = new gallery(jQuery('#myGallery'), {
+						timed: true,
+						showArrows: <?php echo $s5_hidebut ?>,
+						showCarousel: <?php echo $s5_hidecar ?>,
+						showInfopane: <?php echo $s5_hidetext ?>,
+						<?php if($s5_hidetext == "truee") {?>
+						textShowCarousel: <?php echo $s5_dropdowntext ?>,
+						<?php } ?>
+						delay: <?php echo $s5_delay ?>,
+						<?php if ($jseffect	== "fade") { ?>
+							defaultTransition: "fade"
+						<?php } ?>
+						<?php if ($jseffect	== "continuoushorizontal") { ?>
+							defaultTransition: "continuoushorizontal"
+						<?php } ?>
+						<?php if ($jseffect	== "fadeslideleft") { ?>
+						defaultTransition: "fadeslideleft"
+						<?php } ?>
+						<?php if ($jseffect	== "continuousvertical") { ?>
+						defaultTransition: "continuousvertical"
+						<?php } ?>
+					});
+						jQuery('#myGallery').bind('mouseover',function(){window.myGallery.clearTimer();});
+					jQuery('#myGallery').bind('mouseout',function(){window.myGallery.prepareTimer();});
+			}
+	function s5_icfstartGalleryload() {
+	s5_icfstartGallery();}
+	window.setTimeout(s5_icfstartGalleryload,400);
+	</script>
+	<?php
+	}else{
+		print('<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>');
+		print('<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>');
+		print('<script src="'.$this->check_override('js/jd.gallery.js').'" type="text/javascript"></script>');
+		print('<script src="'.$this->check_override('js/jd.gallery.transitions.js').'" type="text/javascript"></script>');
 
+	?>
+		<script type="text/javascript">//<![CDATA[
+		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css');?>" rel="stylesheet" type="text/css" media="screen" />');
+	//]]></script>
+		<script>
 
-		<script type="text/javascript">
-			function startGallery() {
-			document.getElementById("s5_iacf_content_wrap").style.display = 'block';
-				var myGallery = new gallery($('myGallery'), {
-					timed: true,
-					showArrows: <?php echo $s5_hidebut ?>,
-					showCarousel: <?php echo $s5_hidecar ?>,
-					showInfopane: <?php echo $s5_hidetext ?>,
+		function s5_icfstartGallery() {
+				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
+				window.myGallery = new gallery($('myGallery'), {
+						timed: true,
+						showArrows: <?php echo $s5_hidebut ?>,
+						showCarousel: <?php echo $s5_hidecar ?>,
+						showInfopane: <?php echo $s5_hidetext ?>,
+						<?php if($s5_hidetext == "truee") {?>
+						textShowCarousel: <?php echo $s5_dropdowntext ?>,
+						<?php } ?>
+						delay: <?php echo $s5_delay ?>,
+						<?php if ($jseffect	== "fade") { ?>
+							defaultTransition: "fade"
+						<?php } ?>
+						<?php if ($jseffect	== "continuoushorizontal") { ?>
+							defaultTransition: "continuoushorizontal"
+						<?php } ?>
+						<?php if ($jseffect	== "fadeslideleft") { ?>
+						defaultTransition: "fadeslideleft"
+						<?php } ?>
+						<?php if ($jseffect	== "continuousvertical") { ?>
+						defaultTransition: "continuousvertical"
+						<?php } ?>
+					});
+					$('myGallery').addEvent('mouseover',function(){window.myGallery.clearTimer();});
+					$('myGallery').addEvent('mouseout',function(){window.myGallery.prepareTimer();});
+			}
+	function s5_icfstartGalleryload() {
+	s5_icfstartGallery();}
+	window.setTimeout(s5_icfstartGalleryload,400);
+	</script>
 
-					<?php if($s5_hidetext == "truee") {?>
-					textShowCarousel: <?php echo $s5_dropdowntext ?>,
-					<?php } ?>
-
-					delay: <?php echo $s5_delay ?>,
-
-					<?php if ($jseffect	== "fade") { ?>
-						defaultTransition: "fade"
-					<?php } ?>
-					<?php if ($jseffect	== "continuoushorizontal") { ?>
-						defaultTransition: "continuoushorizontal"
-					<?php } ?>
-					<?php if ($jseffect	== "fadeslideleft") { ?>
-					defaultTransition: "fadeslideleft"
-					<?php } ?>
-					<?php if ($jseffect	== "continuousvertical") { ?>
-					defaultTransition: "continuousvertical"
-					<?php } ?>
-				});	}
-			window.addEvent('domready',startGallery);
-		</script>
+	<?php } ?>
 		<div class="content" style="position:relative;z-index:0">
-			<div id="myGallery" style="height:<?php echo $height_s5_iacf ?>;width:<?php echo $width_s5_iacf ?>;">
+			<div id="myGallery" style="<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;">
+			<?php if ($s5stretchimage == "stretch") { ?>
+				<div id="myGallery_height">
+					<img id="myGallery_height_img" style="display:block" alt="" src="<?php echo $picture1_s5_iacf; ?>" />
+				</div>
+			<?php } ?>
 			<div id="s5_iacf_content_wrap" style="display:none">
 				<?php if ($picture1_s5_iacf != "") { ?>
 				<div class="imageElement" style="z-index:0;">
@@ -189,7 +254,7 @@ echo '<script language="javascript" type="text/javascript">var s5_hidetext = "'.
 					<p style="text-shadow:1px 1px #000000;"><?php echo $picture10text_s5_iacf?></p>
 					<a href="<?php if ($picture10link_s5_iacf != "") {echo $picture10link_s5_iacf;} else { echo "javascript:;";}?>" title="open image" class="open"></a>
 					<img src="<?php echo $picture10_s5_iacf ?>" alt="<?php echo $title10 ?>" class="full" />
-					<img src="<?php echo $picture10_s5_iacf ?> alt="<?php echo $title10 ?>" class="thumbnail" />
+					<img src="<?php echo $picture10_s5_iacf ?>" alt="<?php echo $title10 ?>" class="thumbnail" />
 				</div>
 				<?php } ?>
 			</div>
@@ -850,7 +915,7 @@ window.setTimeout('picture10text_effect_small()',10);
 
 </div>
 
-<script language="javascript" type="text/javascript" src="modules/mod_s5_image_and_content_fader/js/fader.js"></script>
+<script type="text/javascript" src="modules/mod_s5_image_and_content_fader/js/fader.js"></script>
 
 <script type="text/javascript">
 
