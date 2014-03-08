@@ -46,6 +46,9 @@ Element.implement({
 });
 
 var s5_dropdowntext2 = s5_dropdowntext;
+var s5_verticalhorizontal2 = s5_verticalhorizontal;
+
+
 
 
 // declaring the class
@@ -88,7 +91,7 @@ var gallery = {
 		thumbGenerator: 'resizer.php',
 		useExternalCarousel: false,
 		carouselElement: false,
-		carouselHorizontal: true,
+		carouselHorizontal: s5_verticalhorizontal2,
 		activateCarouselScroller: true,
 		carouselPreloader: true,
 		textPreloadingCarousel: 'Loading...',

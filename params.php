@@ -14,6 +14,7 @@ $s5_hidetext = $this->get( 's5_hidetext' );
 $s5_delay = $this->get( 's5_delay' );
 $s5_slide_opacity = $this->get( 's5_slide_opacity' );
 $s5_slide_opacity = $s5_slide_opacity/100;
+$s5_verticalhorizontal = $this->get( 's5_verticalhorizontal' );
 if ($s5_hidecar == "falsee") {$s5_hidecar = "false";}
 if ($s5_hidecar == "truee") {$s5_hidecar = "true";}
 if ($s5_hidebut == "falsee") {$s5_hidebut = "false";}

@@ -48,6 +48,7 @@ $s5ic_url = $this->plugin_dir;
 echo '<script type="text/javascript">var s5_hidecar = "'.$s5_hidecar.'";</script>';
 echo '<script type="text/javascript">var s5_hidebut = "'.$s5_hidebut.'";</script>';
 echo '<script type="text/javascript">var s5_hidetext = "'.$s5_hidetext.'";</script>';
+echo '<script language="javascript" type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
 
 ?>
 

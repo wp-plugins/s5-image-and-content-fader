@@ -69,6 +69,11 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.0.3
+
+ - Updated javascript to fix memory leak
+ - Updated options to include additional layout capabilities.
+
 3.0.2
 
  - Extended override detection to include tmpl/default.php (Example: http://shape5.com/demo/index.php?wp/new_vision - info slide moved below image)

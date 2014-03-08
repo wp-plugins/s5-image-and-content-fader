@@ -20,6 +20,7 @@
 		  unset($output);
 		  break;
 		case "radio":
+		case "list":
 		  $output = '<p><label for="'.$field_id.'">'.$option['label'].'</label><select id="'.$field_id.'" name="'.$field_name.'" class="widefat" style="width:100%;">';
 			  foreach($option->option as $select){
 				  $output .='<option ';

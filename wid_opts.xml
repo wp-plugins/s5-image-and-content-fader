@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<extension type="module" version="3.1.0" method="upgrade" client="site">
+<extension type="widget" version="3.1.0" method="upgrade" client="site">
 	<name>S5 Image and Content Fader v3</name>
 	<author>Shape5.com</author>
 	<creationDate>July 2010</creationDate>
@@ -7,25 +7,25 @@
 	<authorEmail>contact@shape5.com</authorEmail>
 	<authorUrl>www.shape5.com</authorUrl>
 	<version>3.2.0</version>
-	<description>This widget will display images of any url and user defined conent in one of 4 effect transitions.  Choose between actual size and stretch for your images and enter in pixels or percentages for your width, great for responsive/fluid websites!  Powered by jQuery but if you experience conflicts you can enable legacy S5 Effects mode (contains less features than jQuery version).  </description>
+	<description>This widget will display images of any url and user defined conent in one of 4 effect transitions.  Choose between actual size and stretch for your images and enter in pixels or percentages for your width, great for responsive/fluid websites!  Powered by Mootools/Jquery but if you experience conflicts you can enable legacy S5 Effects mode (contains less features than Mootools/Jquery version).  </description>
 	<config>
 		<fields name="params">
-		<fieldset name="basic" label="Basic Settings">
+		<fieldset name="basic">
                 <field name="pretext" type="textarea" cols="40" rows="4" default="" label="Pre-Text" description="Enter any pre-text message." />
                 <field name="height" type="text" default="183px" label="Height" description="Enter the height of the image fader." />
                 <field name="width" type="text" default="482px" label="Width (ex. 482px or 100%)" description="Enter the width of the image fader in pixels or percentages for responsive/fluid style websites." />
-				<field name="s5stretchimage" type="radio" default="actualsize" label="If above is percentage width, choose image style" description="This option allows you to have your images stretch to fit the width of the image fader for fluid or responsive websites. The images will continue to fit and stretch to whatever width you have set. Height is automatic. Images should all be the same height and width before you upload them, this module will not resize them to be equal. NOTE: Not compatibile with older browsers and some versions of IE. This feature should only be used if the template was designed with a responsive or fluid layout. Some templates contain module overrides where this feature is not available because the overrides were created before this feature was added.">
+				<field name="s5stretchimage" type="radio" default="actualsize" label="If above is percentage width, choose image style" description="This option allows you to have your images stretch to fit the width of the image fader for fluid or responsive websites. The images will continue to fit and stretch to whatever width you have set. Height is automatic. Images should all be the same height and width before you upload them, this widget will not resize them to be equal. NOTE: Not compatibile with older browsers and some versions of IE. This feature should only be used if the template was designed with a responsive or fluid layout. Some templates contain widget overrides where this feature is not available because the overrides were created before this feature was added.">
 					<option value="actualsize">Actual Size</option>
 					<option value="stretch">Stretch to Fit</option>
 				</field>
-				<field name="s5pixelwidth" type="text" default="0px" label="If Stretch to Fit is enabled: Enter in the width in pixels to disable stretching, ex 800px" description="If you are using a responsive style website you can enter in a max width here so your images will no longer stretch once the browser is shrunken to the specified width. If the browser size meets the specified width the height of the module will become the specified height parameter as well. To disable this function simply enter 0px" />
+				<field name="s5pixelwidth" type="text" default="0px" label="If Stretch to Fit is enabled: Enter in the width in pixels to disable stretching, ex 800px" description="If you are using a responsive style website you can enter in a max width here so your images will no longer stretch once the browser is shrunken to the specified width. If the browser size meets the specified width the height of the widget will become the specified height parameter as well. To disable this function simply enter 0px" />
 
                 <field name="background" type="text" default="" label="Background Color (leave blank for none) ex:FFFFFF" description="Enter the background color. Leave blank for none." />
-				<field name="jslibrary" type="radio" default="mootools" label="Choose jQuery or Legacy Mode (S5 Effects)" description="jQuery option has a directory slider and navigation arrows while s5 effects only displays the images and content. Mootools will be used in Joomla 2.5 and lower, and Jquery will be used in Joomla 3.0+">
-					<option value="mootools">Jquery</option>
+				<field name="jslibrary" type="radio" default="mootools" label="Choose Mootools or Legacy Mode (S5 Effects)" description="The Mootools/Jquery option has a directory slider and navigation arrows while s5 effects only displays the images and content. Mootools will be used in Joomla 2.5 and lower, and Jquery will be used in Joomla 3.0+">
+					<option value="mootools">Mootools/Jquery</option>
 					<option value="s5effects">Legacy (S5 Effects)</option>
 				</field>
-				<field name="jseffect" type="list" default="fade" label="Choose your effect (mootools/jquery version only)" description="Choose the effect you would like to happen between image transitions.  jQuery versions only, S5 effects will just fade in and out">
+				<field name="jseffect" type="list" default="fade" label="Choose your effect (mootools/jquery version only)" description="Choose the effect you would like to happen between image transitions.  Mootools/Jquery versions only, S5 effects will just fade in and out">
 					<option value="fade">Fade</option>
 					<option value="continuoushorizontal">Continuous Horizontal</option>
 					<option value="fadeslideleft">Fade Slide Left</option>
@@ -37,6 +37,18 @@
 				<field name="s5_delay" type="text" default="9000" label="Delay Time" description="Enter the time in milliseconds for slide delay" />
 
 				<field name="s5_slide_opacity" type="text" default="70" label="Slide Opacity" description="Enter the opacity of the text slide in increments of 10. Enter 100 to disable opacity." />
+
+				<field name="s5_thumbnailstretch" type="radio" default="true" label="Thumbnails to fit or show actual size in their boxes" description="Choose to show thumbnails shrunk down to fit the thumbnail width and height or to show as actual size">
+					<option value="true">Shrink to Fit</option>
+					<option value="false">Actual Size</option>
+				</field>
+
+
+
+				<field name="s5_verticalhorizontal" type="radio" default="true" label="Choose Vertical or Horizontal Thumb Layout" description="Choose horiztonal or vertical thumbnail layout">
+					<option value="true">Vertical</option>
+					<option value="false">Horizontal</option>
+				</field>
 
 				<field name="s5_hidecar" type="radio" default="truee" label="Enable or Disable the picture carousel" description="Choose to enable or disable the carousel drop down thumbnail pictures">
 					<option value="truee">Enabled</option>

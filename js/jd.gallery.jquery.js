@@ -100,9 +100,11 @@ morphx.prototype.cancel=function(){
 }
 morphx.prototype.chain=Function.prototype.chain;
 morphx.prototype.completefunc=function(f){
-	var old=this.options.complete;
-	this.options.complete=function(){old();f();}.bind(this);
-	return this;
+
+        this.options.complete=f.bind(this);
+
+        return this;
+
 }
 morphx.prototype.clearChain=function(){
 	window.morphxchain=function(){};
@@ -203,6 +205,10 @@ var s5_dropdowntext2 = s5_dropdowntext;
 		}
 		if (change.y || change.x) this.options.onChange(scroll.x + change.x, scroll.y + change.y);
 	}
+	
+	
+var s5_dropdowntext2 = s5_dropdowntext;
+var s5_verticalhorizontal2 = s5_verticalhorizontal;
 
 
 // declaring the class
@@ -244,7 +250,7 @@ var gallery =window.gallery= function(element, options) {
 		thumbGenerator: 'resizer.php',
 		useExternalCarousel: false,
 		carouselElement: false,
-		carouselHorizontal: true,
+		carouselHorizontal: s5_verticalhorizontal2,
 		activateCarouselScroller: true,
 		carouselPreloader: true,
 		textPreloadingCarousel: 'Loading...',
@@ -337,6 +343,8 @@ var gallery =window.gallery= function(element, options) {
 					elementDict.description= $(options.subtitleSelector,el)[0].innerHTML
 			}	
 			if ((options.embedLinks) | (options.useReMooz)){
+				while($(options.linkSelector,el)[0] == undefined) 
+					; 
 				elementDict.link=$(options.linkSelector,el)[0].href||false;
 					// hides false and open image tooltip popups // linkTitle: el.getElement(options.linkSelector).title||false,
 				elementDict.linkTarget= $(options.linkSelector,el).attr('target')||false;
