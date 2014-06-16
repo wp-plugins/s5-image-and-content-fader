@@ -4,7 +4,6 @@
 Author: Shape 5 - Professional Template Community
 Available for download at www.shape5.com
 */
-
 ?>
 
 <?php if ($pretext_s5_iacf != "") { ?>
@@ -48,7 +47,6 @@ $s5ic_url = $this->plugin_dir;
 echo '<script type="text/javascript">var s5_hidecar = "'.$s5_hidecar.'";</script>';
 echo '<script type="text/javascript">var s5_hidebut = "'.$s5_hidebut.'";</script>';
 echo '<script type="text/javascript">var s5_hidetext = "'.$s5_hidetext.'";</script>';
-echo '<script language="javascript" type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
 
 ?>
 
@@ -61,26 +59,33 @@ if ($jslibrary == "mootools") {
 	if(file_exists(get_theme_root() . '/' . get_template().'/vertex')) {
 	$template_vertex = "yes";
 	}
-		print('<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>');
+		echo '<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>';
 		if($template_vertex == "no"){ ?>
 		<script type="text/javascript">//<![CDATA[
 		if(jQuery.easing.easeOutExpo==undefined){
-		document.write('<script src="<?php echo $this->check_override('js/jquery-ui.min.js'); ?>"><\/script>');
+		document.write('<script type="text/javascript" src="<?php echo $this->check_override('js/jquery-ui.min.js');?>"></script>');
 		}
 		//]]></script>
 		<script type="text/javascript">jQuery.noConflict();</script>
 		<?php }
-		print('<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>');
-		print('<script src="'.$this->check_override('js/jd.gallery.jquery.js').'" type="text/javascript"></script>');
-		print('<script src="'.$this->check_override('js/jd.gallery.transitions.jquery.js').'" type="text/javascript"></script>');
+		if ($s5_thumbnailstretch == "true") {
+			echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;;}</style>';
+		}
+
+		echo '<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>';
+		echo '<script type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
+
+		echo '<script type="text/javascript" src="'.$this->check_override('js/jd.gallery.jquery.js').'"></script>';
+		echo '<script type="text/javascript" src="'.$this->check_override('js/jd.gallery.transitions.jquery.js').'"></script>';
 	?>
 				<script type="text/javascript">//<![CDATA[
-		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css'); ?>" rel="stylesheet" type="text/css" media="screen" />');
+		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css');?>" rel="stylesheet" type="text/css" media="screen" />');
 	//]]></script>
 
 
 
 			<script type="text/javascript">
+
 
 				function s5_icfstartGallery() {
 				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
@@ -113,18 +118,34 @@ if ($jslibrary == "mootools") {
 	s5_icfstartGallery();}
 	window.setTimeout(s5_icfstartGalleryload,400);
 	</script>
+
+		<?php if ($s5_verticalhorizontal == "true") { ?>
+	<style>
+		.jdGallery .carousel .carouselWrapper, .jdExtCarousel .carouselWrapper, .jdGallery .carousel, .jdGallery div.carouselContainer {height:<?php echo $height_s5_iacf ?>;}
+	</style>
+	<?php } ?>
+
 	<?php
 	}else{
-		print('<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>');
-		print('<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>');
-		print('<script src="'.$this->check_override('js/jd.gallery.js').'" type="text/javascript"></script>');
-		print('<script src="'.$this->check_override('js/jd.gallery.transitions.js').'" type="text/javascript"></script>');
+
+		if ($s5_thumbnailstretch == "true") {
+			echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;}</style>';
+		}
+
+		echo '<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>';
+		echo '<script type="text/javascript">var s5_dropdowntext = "'.$s5_dropdowntext.'";</script>';
+
+		echo '<script type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
+
+		echo '<script type="text/javascript" src="'.$this->check_override('js/jd.gallery.js').'"></script>';
+		echo '<script type="text/javascript" src="'.$this->check_override('js/jd.gallery.transitions.js').'"></script>';
 
 	?>
 		<script type="text/javascript">//<![CDATA[
 		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css');?>" rel="stylesheet" type="text/css" media="screen" />');
 	//]]></script>
 		<script>
+
 
 		function s5_icfstartGallery() {
 				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
@@ -158,12 +179,20 @@ if ($jslibrary == "mootools") {
 	window.setTimeout(s5_icfstartGalleryload,400);
 	</script>
 
+
+	<?php if ($s5_verticalhorizontal == "true") { ?>
+	<style>
+		.jdGallery .carousel .carouselWrapper, .jdExtCarousel .carouselWrapper, .jdGallery .carousel, .jdGallery div.carouselContainer {height:<?php echo $height_s5_iacf ?>;}
+	</style>
 	<?php } ?>
-		<div class="content" style="position:relative;z-index:0">
+
+
+	<?php } ?>
+		<div class="content <?php if ($s5_verticalhorizontal == "true") { ?>s5vertical<?php } ?>" style="position:relative;z-index:0">
 			<div id="myGallery" style="<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;">
 			<?php if ($s5stretchimage == "stretch") { ?>
 				<div id="myGallery_height">
-					<img id="myGallery_height_img" style="display:block" alt="" src="<?php echo $picture1_s5_iacf; ?>" />
+					<img id="myGallery_height_img" alt="" src="<?php echo $picture1_s5_iacf; ?>" />
 				</div>
 			<?php } ?>
 			<div id="s5_iacf_content_wrap" style="display:none">
@@ -286,12 +315,12 @@ var s5_iacf_inc = 18;
 <div id="picture1_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture1_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture1link_s5_iacf != "") { ?>
 <a href="<?php echo $picture1link_s5_iacf ?>" target="<?php echo $picture1target_s5_iacf ?>">
-<img alt="" id="picture1_blank_s5_iacf" style="border:none" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" id="picture1_blank_s5_iacf" style="border:none" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture1link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture1_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture1_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture1text_s5_iacf != "") { ?>
@@ -349,12 +378,12 @@ window.setTimeout('picture1text_effect_small()',10);
 <div id="picture2_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture2_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture2link_s5_iacf != "") { ?>
 <a href="<?php echo $picture2link_s5_iacf ?>" target="<?php echo $picture2target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture2_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture2_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture2link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture2_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture2_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture2text_s5_iacf != "") { ?>
@@ -412,12 +441,12 @@ window.setTimeout('picture2text_effect_small()',10);
 <div id="picture3_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture3_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture3link_s5_iacf != "") { ?>
 <a href="<?php echo $picture3link_s5_iacf ?>" target="<?php echo $picture3target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture3_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture3_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture3link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture3_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture3_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture3text_s5_iacf != "") { ?>
@@ -475,12 +504,12 @@ window.setTimeout('picture3text_effect_small()',10);
 <div id="picture4_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture4_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture4link_s5_iacf != "") { ?>
 <a href="<?php echo $picture4link_s5_iacf ?>" target="<?php echo $picture4target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture4_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture4_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture4link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture4_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture4_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture4text_s5_iacf != "") { ?>
@@ -538,12 +567,12 @@ window.setTimeout('picture4text_effect_small()',10);
 <div id="picture5_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture5_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture5link_s5_iacf != "") { ?>
 <a href="<?php echo $picture5link_s5_iacf ?>" target="<?php echo $picture5target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture5_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture5_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture5link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture5_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture5_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture5text_s5_iacf != "") { ?>
@@ -601,12 +630,12 @@ window.setTimeout('picture5text_effect_small()',10);
 <div id="picture6_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture6_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture6link_s5_iacf != "") { ?>
 <a href="<?php echo $picture6link_s5_iacf ?>" target="<?php echo $picture6target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture6_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture6_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture6link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture6_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture6_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture6text_s5_iacf != "") { ?>
@@ -664,12 +693,12 @@ window.setTimeout('picture6text_effect_small()',10);
 <div id="picture7_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture7_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture7link_s5_iacf != "") { ?>
 <a href="<?php echo $picture7link_s5_iacf ?>" target="<?php echo $picture7target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture7_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture7_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture7link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture7_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture7_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture7text_s5_iacf != "") { ?>
@@ -727,12 +756,12 @@ window.setTimeout('picture7text_effect_small()',10);
 <div id="picture8_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture8_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture8link_s5_iacf != "") { ?>
 <a href="<?php echo $picture8link_s5_iacf ?>" target="<?php echo $picture8target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture8_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture8_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture8link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture8_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture8_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture8text_s5_iacf != "") { ?>
@@ -790,12 +819,12 @@ window.setTimeout('picture8text_effect_small()',10);
 <div id="picture9_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture9_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture9link_s5_iacf != "") { ?>
 <a href="<?php echo $picture9link_s5_iacf ?>" target="<?php echo $picture9target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture9_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture9_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture9link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture9_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture9_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture9text_s5_iacf != "") { ?>
@@ -853,12 +882,12 @@ window.setTimeout('picture9text_effect_small()',10);
 <div id="picture10_s5_iacf" style="padding:0px; display:none; height:<?php echo $height_s5_iacf ?>; opacity:.0; <?php if ($iss_ie6_s5_iacf == "yes" || $iss_ie7_s5_iacf == "yes" || $iss_ie8_s5_iacf == "yes") { ?>filter: alpha(opacity=0); -moz-opacity: 0;<?php } ?> width:<?php echo $width_s5_iacf ?>; overflow:hidden; background-image: url(<?php echo $picture10_s5_iacf ?>); background-repeat: no-repeat">
 <?php if ($picture10link_s5_iacf != "") { ?>
 <a href="<?php echo $picture10link_s5_iacf ?>" target="<?php echo $picture10target_s5_iacf ?>">
-<img alt="" style="border:none" id="picture10_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture10_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 </a>
 <?php } ?>
 
 <?php if ($picture10link_s5_iacf == "") { ?>
-<img alt="" style="border:none" id="picture10_blank_s5_iacf" src="modules/mod_s5_image_and_content_fader/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
+<img alt="" style="border:none" id="picture10_blank_s5_iacf" src="<?php echo $s5ic_url; ?>/images/blank.gif" height="<?php echo $height_s5_iacf ?>" width="<?php echo $width_s5_iacf ?>"></img>
 <?php } ?>
 
 <?php if ($picture10text_s5_iacf != "") { ?>
@@ -916,7 +945,7 @@ window.setTimeout('picture10text_effect_small()',10);
 
 </div>
 
-<script type="text/javascript" src="modules/mod_s5_image_and_content_fader/js/fader.js"></script>
+<script type="text/javascript" src="<?php echo $this->check_override('/js/fader.js'); ?>"></script>
 
 <script type="text/javascript">
 

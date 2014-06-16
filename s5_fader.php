@@ -3,7 +3,7 @@
 Plugin Name: S5 Image And Content Fader
 Plugin URI: http://s5co.us/ICFDetails
 Description: The S5 Image and Content Fader is an advanced version of the S5 Image Fader. This tool gives you all the features of the Image Fader plus the ability to add content to each slide with a nice transition effect. Each slide's content has its own configurable settings such as colors, sizes, opacity, and more! Best of all it's free!
-Version: 3.0.4
+Version: 3.0.5
 Author: Shape 5 LLC
 Author URI: http://www.shape5.com
 License: GPL2
@@ -35,12 +35,18 @@ class S5_ICFader extends WP_Widget {
   var $wid_instance;
 
     /** constructor */
-    function S5_ICFader() {
-		$this->plugin_dir = plugins_url( '/' , __FILE__ );
+	function __construct() {
+		//Widget Specific Variables
 		$this->override_folder = 'mod_s5_image_and_content_fader';
+		$this->plugin_dir = plugins_url( '/' , __FILE__ );
 		$this->xml_dir = plugin_dir_path( __FILE__ );
-       parent::WP_Widget(false, $name = 'Shape5 Image & Content Fader');
-    }
+		$this->xml = simplexml_load_file($this->xml_dir.'wid_opts.xml');
+		parent::WP_Widget(false, $name = $this->xml->name, array('description' => __($this->xml->description)));
+		if(!is_admin()){
+			add_action( 'wp_head', array(&$this,'head_calls' ));
+			wp_enqueue_script( 'jQuery');
+		}else{add_thickbox();}
+	}
 
 	/** Override detection**/
 	function check_override($filename, $use_path=false){
@@ -71,43 +77,46 @@ class S5_ICFader extends WP_Widget {
 	}
 
 
-    /** @see WP_Widget::widget */
-    function widget($args, $instance) {
+	/** @see WP_Widget::widget */
+	function widget($args, $instance) {
 		$this->instance = $instance;
 		extract( $args );
 		require_once('params.php');
-        $title = apply_filters('widget_title', $instance['title']);
-        ?>
-              <?php echo $before_widget; ?>
-                  <?php if ( $title ){
-                    echo $before_title . $title . $after_title;
-                  }else{
-					//echo $before_title . $after_title;
-				  }?>
-                  <?php include_once($this->check_override('tmpl/default.php',true)); ?>
-              <?php echo $after_widget; ?>
-        <?php
-    }
+		$title = apply_filters('widget_title', $instance['title']);
+		echo $before_widget;
+		if ( $title ){ echo $before_title . $title . $after_title;}
+		include_once($this->check_override('tmpl/default.php',true));
+		echo $after_widget;
+	}
 
-    /** @see WP_Widget::update */
-    function update($new_instance, $old_instance) {
-	$instance = $old_instance;
-	$instance['title'] = strip_tags($new_instance['title']);
-	$instance = $new_instance;
-        return $instance;
-    }
+	/** @see WP_Widget::update */
+	function update($new_instance, $old_instance) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance = $new_instance;
+		return $instance;
+	}
 
-    /** @see WP_Widget::form */
-    function form($instance) {
-        $title = isset($instance['title']) ? esc_attr($instance['title']) : '';
+	/** @see WP_Widget::form */
+	function form($instance) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$this->wid_instance = $instance;
-        ?>
-         <p>
-          <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-          <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
-        </p>
-        <?php include('tmpl/form.php');
-    }
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<?php include('tmpl/form.php');
+	}
+
+		function head_calls(){
+		$template_vertex = "no";
+		$template_json_location = get_theme_root() . '/' . get_template().'/vertex/';
+		if(file_exists($template_json_location)) {
+			$template_vertex = "yes";
+		}
+		if($template_vertex == "no"){ }
+	}
 
 } // class S5_ICFader
 

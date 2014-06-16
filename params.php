@@ -1,27 +1,36 @@
 <?php
 /**
-@version 3.0: mod_s5_image_and_content_fader
 Author: Shape 5 - Professional Template Community
 Available for download at www.shape5.com
 */
 
+// no direct access
+
+$s5stretchimage = "";
+$s5_thumbnailstretch = "";
+$s5pixelwidth = "";
+
+?><script language="javascript" type="text/javascript">var s5_verticalhorizontal = "null";</script><?php
+
+
 
 $jslibrary = $this->get( 'jslibrary' );
 $s5_dropdowntext = $this->get( 's5_dropdowntext' );
+$s5_verticalhorizontal = $this->get( 's5_verticalhorizontal' );
+$s5_thumbnailstretch = $this->get( 's5_thumbnailstretch' );
 $s5_hidecar = $this->get( 's5_hidecar' );
 $s5_hidebut = $this->get( 's5_hidebut' );
 $s5_hidetext = $this->get( 's5_hidetext' );
 $s5_delay = $this->get( 's5_delay' );
 $s5_slide_opacity = $this->get( 's5_slide_opacity' );
 $s5_slide_opacity = $s5_slide_opacity/100;
-$s5_verticalhorizontal = $this->get( 's5_verticalhorizontal' );
 if ($s5_hidecar == "falsee") {$s5_hidecar = "false";}
 if ($s5_hidecar == "truee") {$s5_hidecar = "true";}
 if ($s5_hidebut == "falsee") {$s5_hidebut = "false";}
 if ($s5_hidebut == "truee") {$s5_hidebut = "true";}
 if ($s5_hidetext == "falsee") {$s5_hidetext = "false";}
 if ($s5_hidetext == "truee") {$s5_hidetext = "true";}
-$jseffect = $this->get( 'jseffect',1,'ICF_Effect' );
+$jseffect = $this->get( 'jseffect' );
 $background_s5_iacf		= $this->get( 'background' );
 $pretext_s5_iacf		= $this->get( 'pretext' );
 $tween_time_s5_iacf	    = "0.5";
@@ -219,4 +228,4 @@ $s5pixelwidth = "null";}
 <script type="text/javascript">//<![CDATA[
     document.write('<style>.jdGallery .slideElement {background-size:100% auto;}<?php if ($s5pixelwidth  != "") { ?>@media screen and (max-width: <?php echo $s5pixelwidth; ?>) {#myGallery { height:<?php echo $height_s5_iacf ?> !important; } .jdGallery .slideElement {background-size:auto auto !important;}}<?php } ?></style>');
 //]]></script>
-<?php } ?>
+<?php }
