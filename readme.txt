@@ -69,6 +69,11 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.0.6
+
+ - Minor adjustment to fix error caused by WP translation on non-English sites
+ - CSS adjustment to fix 3px gap at top of image
+
 3.0.5
 
  - Settings area overhaul
