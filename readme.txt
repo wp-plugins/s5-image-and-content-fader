@@ -69,6 +69,10 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.0.7
+
+ - Fixed javascript typo
+
 3.0.6
 
  - Minor adjustment to fix error caused by WP translation on non-English sites

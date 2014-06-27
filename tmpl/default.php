@@ -63,7 +63,7 @@ if ($jslibrary == "mootools") {
 		if($template_vertex == "no"){ ?>
 		<script type="text/javascript">//<![CDATA[
 		if(jQuery.easing.easeOutExpo==undefined){
-		document.write('<script type="text/javascript" src="<?php echo $this->check_override('js/jquery-ui.min.js');?>"></script>');
+		document.write('<script src="<?php echo $this->check_override('js/jquery-ui.min.js');?>"><\/script>');
 		}
 		//]]></script>
 		<script type="text/javascript">jQuery.noConflict();</script>
