@@ -187,9 +187,9 @@ if ($jslibrary == "mootools") {
 	<?php } ?>
 
 
-	<?php } ?>
+	<?php } if($height_s5_iacf == '100%'){$height_s5_iacf = '103%';}?>
 		<div class="content <?php if ($s5_verticalhorizontal == "true") { ?>s5vertical<?php } ?>" style="position:relative;z-index:0">
-			<div id="myGallery" style="<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;margin-top:-3px;">
+			<div id="myGallery" style="<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;">
 			<?php if ($s5stretchimage == "stretch") { ?>
 				<div id="myGallery_height">
 					<img id="myGallery_height_img" alt="" src="<?php echo $picture1_s5_iacf; ?>" />
