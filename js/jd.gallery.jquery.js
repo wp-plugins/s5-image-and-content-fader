@@ -88,15 +88,18 @@ morphx.prototype.data=function(){
 }
 morphx.prototype.start=function(obj,opts){
 	//this.element.stop();
+	//console.log(this.options.duration);
 	if(opts)this.options=jQuery.extend(this.options,opts);
 	this.element.animate(obj, this.options);
 	return this;
 }
 morphx.prototype.stop=function(){
 	this.element.stop();
+	return this;
 }
 morphx.prototype.cancel=function(){
 	this.element.stop();
+	return this;
 }
 morphx.prototype.chain=Function.prototype.chain;
 morphx.prototype.completefunc=function(f){
@@ -124,7 +127,8 @@ var s5_dropdowntext2 = s5_dropdowntext;
 		velocity: 1,
 		onChange: function(x, y){
 			//console.log(x,y);
-			this.element.scrollTo(x, y);
+			//this.element.scrollTo(x, y);
+			//window.scrollTo(x, y);
 		}.bind(this),
 		fps: 50
 		
@@ -201,7 +205,7 @@ var s5_dropdowntext2 = s5_dropdowntext;
 			} else if (this.page[z] + bottom > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]){
 				change[z] = (this.page[z] - size[z] + bottom - pos[z]) * this.options.velocity;
 			}
-			change[z] = change[z].round();
+			change[z] = Math.round(change[z]);
 		}
 		if (change.y || change.x) this.options.onChange(scroll.x + change.x, scroll.y + change.y);
 	}
@@ -261,14 +265,16 @@ var gallery =window.gallery= function(element, options) {
 		useHistoryManager: false,
 		customHistoryKey: false,
 		/* Plugins: ReMooz */
-		useReMooz: false
+		useReMooz: false,
+		slideShowDuration:3000,
+		slideHideDuration:2000
 	};
 
 	this.initialize(element, options);
-	
 }
 	gallery.prototype.initialize= function(element, options) {
 		this.options=$.extend(this.options, options);
+		
 		$(this).trigger('onInit');
 		this.currentIter = 0;
 		this.lastIter = 0;
@@ -472,7 +478,9 @@ var gallery =window.gallery= function(element, options) {
 		if (this.options.showInfopane)
 		{
 			this.slideInfoZone.clearChain();
-			this.hideInfoSlideShow().chain(this.changeItem.passx(num, this));
+			//this.hideInfoSlideShow().chain(this.changeItem.passx(num, this));
+			this.hideInfoSlideShow();
+			this.changeItem(num);
 		} else
 			this.currentChangeDelay = this.changeItem.delay(500, this, num);
 		if (this.options.embedLinks)
@@ -491,7 +499,7 @@ var gallery =window.gallery= function(element, options) {
 			{
 				if ((i != this.currentIter)) 	this.galleryElements[i].css({opacity: 0});
 			}
-			//console.log(this.galleryData);
+			//console.log(this.galleryData[num].transition);
 			gallery.Transitions[this.galleryData[num].transition].passx([
 				this.galleryElements[this.currentIter],
 				this.galleryElements[num],
@@ -512,12 +520,13 @@ var gallery =window.gallery= function(element, options) {
 			$clear(this.timer);
 	},
 	gallery.prototype.prepareTimer= function() {
-		if (this.options.timed)
-			this.timer = this.nextItem.delay(this.options.delay, this);
+		if (this.options.timed){
+            if(this.timer) this.clearTimer();
+            this.timer = this.nextItem.delay(this.options.delay, this);
+        }
 	},
 	gallery.prototype.doSlideShow= function(position) {
    // start jv
-
         if(this.carousel){
             var thumbs = $('.thumbnail',this.carousel.element);
             thumbs.each(function(i,el){
@@ -547,16 +556,19 @@ var gallery =window.gallery= function(element, options) {
 			if(this.options.preloader)
 				this.galleryElements[0].element.load();
 		} else {
+			
 			if (this.options.showInfopane)
 			{
 				if (this.options.showInfopane)
 				{
 					this.showInfoSlideShow.delay((500 + this.options.fadeDuration), this);
+					//this.showInfoSlideShow();
 				} else
 					if ((this.options.showCarousel)&&(this.options.activateCarouselScroller))
 						this.centerCarouselOn(position);
 			}
 		}
+		
 	},
 	gallery.prototype.createCarousel= function() {
 		var carouselElement;
@@ -607,6 +619,7 @@ var gallery =window.gallery= function(element, options) {
 				onStart: this.carouselWrapper.scroller.stop.bind(this.carouselWrapper.scroller),
 				onComplete: this.carouselWrapper.scroller.start.bind(this.carouselWrapper.scroller)
 			});*/
+			
 			this.carouselWrapper.element.elementScroller = (function(from,to){
 						this.carouselWrapper.element.scroller.stop.bind(this.carouselWrapper.scroller);
 						this.carouselWrapper.element.animate({left:[from,to]},{duration:400,easing:'linear',queue:false,complete:this.carouselWrapper.element.scroller.start.bind(this.carouselWrapper.element.scroller)}).bind(this);
@@ -759,8 +772,10 @@ var gallery =window.gallery= function(element, options) {
 	},
 	gallery.prototype.changeInfoSlideShow= function()
 	{
-		this.hideInfoSlideShow.delay(10, this);
-		this.showInfoSlideShow.delay(500, this);
+		//this.hideInfoSlideShow.delay(10, this);
+		//this.showInfoSlideShow.delay(500, this);
+		this.hideInfoSlideShow.apply(this);
+		this.showInfoSlideShow.apply(this);
 	},
 	gallery.prototype.showInfoSlideShow= function() {
 		$(this).trigger('onShowInfopane');
@@ -768,19 +783,36 @@ var gallery =window.gallery= function(element, options) {
 		element = this.slideInfoZone.element;
 		$('h2',element).html( this.galleryData[this.currentIter].title);
 		$('p',element).html( this.galleryData[this.currentIter].description);
-		if(this.options.slideInfoZoneSlide)
-			this.slideInfoZone.start({'opacity': this.options.slideInfoZoneOpacity, 'height': this.slideInfoZone.element.normalHeight},{duration:600,easing:'easeOutExpo'});
-		else
-			this.slideInfoZone.start({'opacity':this.options.slideInfoZoneOpacity},{duration:1000,easing:'easeOutExpo'});
+		//console.log(this.slideInfoZone.element);
+		if (element.className != 'slideInfoZone slideInfoZone_load') {
+		this.slideInfoZone.element[0].className = 'slideInfoZone';
+		this.adjustclassname.delay(20, this);
+		}
+		this.slideInfoZone.options.duration = this.options.slideShowDuration;
 		if (this.options.showCarousel)
 			this.slideInfoZone.completefunc(this.centerCarouselOn.passx(this.currentIter, this));
+		this.slideInfoZone.completefunc(function(){
+			if(typeof s5_multibox_enabled !== 'undefined'){initMultibox('#myGallery .s5mb');}
+            if(typeof s5_page_scroll_enabled !== 'undefined'){initSmoothscroll();}
+		});
+		if(this.options.slideInfoZoneSlide)
+			this.slideInfoZone.start({'opacity': this.options.slideInfoZoneOpacity, 'height': this.slideInfoZone.element.normalHeight},{easing:'easeOutExpo'});
+		else
+			this.slideInfoZone.start({'opacity':this.options.slideInfoZoneOpacity});
+
 		return this.slideInfoZone;
+	},
+	gallery.prototype.adjustclassname= function() {
+	this.slideInfoZone.element[0].className = 'slideInfoZone slideInfoZone_load';
 	},
 	gallery.prototype.hideInfoSlideShow= function() {
 		$(this).trigger('onHideInfopane');
 		this.slideInfoZone.cancel();
+		this.slideInfoZone.element[0].className = 'slideInfoZone slideInfoZone_unload';
+		this.slideInfoZone.options.duration = this.options.slideHideDuration;
+		//console.log(this.options.slideShowDuration);
 		if(this.options.slideInfoZoneSlide)
-			this.slideInfoZone.start({'opacity': 0, 'height': 0},{duration:1000,easing:'easeOutExpo'});
+			this.slideInfoZone.start({'opacity': 0, 'height': 0},{easing:'easeOutExpo'});
 		else
 			this.slideInfoZone.start({'opacity': 0});
 		return this.slideInfoZone;
@@ -891,7 +923,7 @@ gallery.Transitions = new Object ({
 		oldPos=arguments[0][2];
 		newPos=arguments[0][3];
 		oldFx.options.easing = newFx.options.easing =  'linear';
-		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
+		//oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
 		if (newPos > oldPos) newFx.start({opacity: 1});
 		else
 		{
@@ -905,7 +937,7 @@ gallery.Transitions = new Object ({
 		oldPos=arguments[0][2];
 		newPos=arguments[0][3];
 		oldFx.options.easing = newFx.options.easing =  'linear';
-		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
+		//oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
 		newFx.start({opacity: 1});
 		oldFx.start({opacity: 0});
 	},
@@ -915,7 +947,7 @@ gallery.Transitions = new Object ({
 		oldPos=arguments[0][2];
 		newPos=arguments[0][3];
 		oldFx.options.easing = newFx.options.easing = 'linear';
-		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration / 2;
+		//oldFx.options.duration = newFx.options.duration = this.options.fadeDuration / 2;
 		oldFx.completefunc(newFx.start.passx([{opacity: 1}], newFx)).start({opacity: 0});
 	}
 });

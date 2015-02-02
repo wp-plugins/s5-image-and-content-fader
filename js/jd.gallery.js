@@ -102,7 +102,9 @@ var gallery = {
 		useHistoryManager: false,
 		customHistoryKey: false,
 		/* Plugins: ReMooz */
-		useReMooz: false
+		useReMooz: false,
+		slideShowDuration: 1000,
+		slideHideDuration: 500
 	},
 	initialize: function(element, options) {
 		this.setOptions(options);
@@ -263,9 +265,9 @@ var gallery = {
 		this.galleryInit = 0;
 		this.galleryElements[parseInt(this.currentIter)].set({opacity: 1});
 		if (this.options.showInfopane)
-			this.showInfoSlideShow.delay(1000, this);
+			this.showInfoSlideShow.delay(10, this);
 		if (this.options.useReMooz)
-			this.makeReMooz.delay(1000, this);
+			this.makeReMooz.delay(10, this);
 		var textShowCarousel = formatString(this.options.textShowCarousel, this.currentIter+1, this.maxIter);
 		if (this.options.showCarousel&&(!this.options.carouselPreloader)&&(!this.options.useExternalCarousel))
 			this.carouselBtn.set('html', textShowCarousel).setProperty('title', textShowCarousel);
@@ -309,7 +311,9 @@ var gallery = {
 		if (this.options.showInfopane)
 		{
 			this.slideInfoZone.clearChain();
-			this.hideInfoSlideShow().chain(this.changeItem.pass(num, this));
+			//this.hideInfoSlideShow().chain(this.changeItem.pass(num, this));
+			this.hideInfoSlideShow();
+			this.changeItem(num);
 		} else
 			this.currentChangeDelay = this.changeItem.delay(500, this, num);
 		if (this.options.embedLinks)
@@ -347,8 +351,10 @@ var gallery = {
 			$clear(this.timer);
 	},
 	prepareTimer: function() {
-		if (this.options.timed)
-			this.timer = this.nextItem.delay(this.options.delay, this);
+		if (this.options.timed){
+            if(this.timer) this.clearTimer();
+            this.timer = this.nextItem.delay(this.options.delay, this);
+        }
 	},
 	doSlideShow: function(position) {
    // start jv
@@ -589,7 +595,7 @@ var gallery = {
 	changeInfoSlideShow: function()
 	{
 		this.hideInfoSlideShow.delay(10, this);
-		this.showInfoSlideShow.delay(500, this);
+		this.showInfoSlideShow.delay(10, this);
 	},
 	showInfoSlideShow: function() {
 		this.fireEvent('onShowInfopane');
@@ -597,17 +603,27 @@ var gallery = {
 		element = this.slideInfoZone.element;
 		element.getElement('h2').set('html', this.galleryData[this.currentIter].title);
 		element.getElement('p').set('html', this.galleryData[this.currentIter].description);
+		if (element.className != 'slideInfoZone slideInfoZone_load') {
+		element.className = 'slideInfoZone';
+		this.adjustclassname.delay(20, this);
+		}
+		this.slideInfoZone.options.duration = this.options.slideShowDuration;
 		if(this.options.slideInfoZoneSlide)
-			this.slideInfoZone.start({'opacity': [0, this.options.slideInfoZoneOpacity], 'height': [0, this.slideInfoZone.normalHeight]});
+			this.slideInfoZone.cancel().start({'opacity': [0, this.options.slideInfoZoneOpacity], 'height': [0, this.slideInfoZone.normalHeight]});
 		else
-			this.slideInfoZone.start({'opacity': [0, this.options.slideInfoZoneOpacity]});
+			this.slideInfoZone.cancel().start({'opacity': [0, this.options.slideInfoZoneOpacity]});
 		if (this.options.showCarousel)
 			this.slideInfoZone.chain(this.centerCarouselOn.pass(this.currentIter, this));
 		return this.slideInfoZone;
 	},
+	adjustclassname: function() {
+	element.className = 'slideInfoZone slideInfoZone_load';
+	},
 	hideInfoSlideShow: function() {
 		this.fireEvent('onHideInfopane');
 		this.slideInfoZone.cancel();
+		element.className = 'slideInfoZone slideInfoZone_unload';
+		this.slideInfoZone.options.duration = this.options.slideHideDuration;
 		if(this.options.slideInfoZoneSlide)
 			this.slideInfoZone.start({'opacity': 0, 'height': 0});
 		else
@@ -717,6 +733,8 @@ gallery.Transitions = new Hash ({
 	fade: function(oldFx, newFx, oldPos, newPos){
 		oldFx.options.transition = newFx.options.transition = Fx.Transitions.linear;
 		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
+		oldFx.options.duration = this.options.slideHideDuration;
+		newFx.options.duration = this.options.slideShowDuration;
 		if (newPos > oldPos) newFx.start({opacity: 1});
 		else
 		{
@@ -727,12 +745,16 @@ gallery.Transitions = new Hash ({
 	crossfade: function(oldFx, newFx, oldPos, newPos){
 		oldFx.options.transition = newFx.options.transition = Fx.Transitions.linear;
 		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration;
+		oldFx.options.duration = this.options.slideHideDuration;
+		newFx.options.duration = this.options.slideShowDuration;
 		newFx.start({opacity: 1});
 		oldFx.start({opacity: 0});
 	},
 	fadebg: function(oldFx, newFx, oldPos, newPos){
 		oldFx.options.transition = newFx.options.transition = Fx.Transitions.linear;
 		oldFx.options.duration = newFx.options.duration = this.options.fadeDuration / 2;
+		oldFx.options.duration = this.options.slideHideDuration;
+		newFx.options.duration = this.options.slideShowDuration;
 		oldFx.start({opacity: 0}).chain(newFx.start.pass([{opacity: 1}], newFx));
 	}
 });

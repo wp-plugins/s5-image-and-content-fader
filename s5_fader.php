@@ -116,6 +116,7 @@ class S5_ICFader extends WP_Widget {
 			$template_vertex = "yes";
 		}
 		if($template_vertex == "no"){ }
+		if(!is_admin()){wp_enqueue_script( 'jQuery');}
 	}
 
 } // class S5_ICFader
@@ -123,6 +124,5 @@ class S5_ICFader extends WP_Widget {
 // register S5_ICFader widget
 add_action('widgets_init', create_function('', 'return register_widget("S5_ICFader");'));
 
-if(!is_admin()){wp_enqueue_script( 'jQuery');}
 
 ?>

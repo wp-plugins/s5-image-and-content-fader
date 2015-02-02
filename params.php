@@ -1,5 +1,6 @@
 <?php
 /**
+@version 1.0: mod_s5_image_and_content_fader
 Author: Shape 5 - Professional Template Community
 Available for download at www.shape5.com
 */
@@ -9,8 +10,9 @@ Available for download at www.shape5.com
 $s5stretchimage = "";
 $s5_thumbnailstretch = "";
 $s5pixelwidth = "";
+$hoverstopplay = "yes";
 
-?><script language="javascript" type="text/javascript">var s5_verticalhorizontal = "null";</script><?php
+echo '<script language="javascript" type="text/javascript">var s5_verticalhorizontal = "null";</script>';
 
 
 
@@ -22,6 +24,8 @@ $s5_hidecar = $this->get( 's5_hidecar' );
 $s5_hidebut = $this->get( 's5_hidebut' );
 $s5_hidetext = $this->get( 's5_hidetext' );
 $s5_delay = $this->get( 's5_delay' );
+$s5_hide_time = $this->get( 's5_hide_time' );
+$s5_opacity_time = $this->get( 's5_opacity_time' );
 $s5_slide_opacity = $this->get( 's5_slide_opacity' );
 $s5_slide_opacity = $s5_slide_opacity/100;
 if ($s5_hidecar == "falsee") {$s5_hidecar = "false";}
@@ -69,6 +73,7 @@ $picture10target_s5_iacf	= $this->get( 'picturetarget' );
 $display_time_s5_iacf   	= "10";
 $s5stretchimage = $this->get( 's5stretchimage' );
 $s5pixelwidth = $this->get( 's5pixelwidth' );
+$hoverstopplay = $this->get( 'hoverstopplay' );
 
 
 $title1	= $this->get( 'title1' );
@@ -226,6 +231,11 @@ $s5pixelwidth = "null";}
 ?>
 <?php if ($s5stretchimage  == "stretch") { ?>
 <script type="text/javascript">//<![CDATA[
-    document.write('<style>.jdGallery .slideElement {background-size:100% auto;}<?php if ($s5pixelwidth  != "") { ?>@media screen and (max-width: <?php echo $s5pixelwidth; ?>) {#myGallery { height:<?php echo $height_s5_iacf ?> !important; } .jdGallery .slideElement {background-size:auto auto !important;}}<?php } ?></style>');
+    document.write('<style>.jdGallery .slideElement {background-size:100% auto;}<?php if ($s5pixelwidth  != "") { ?>@media screen and (max-width: <?php echo $s5pixelwidth; ?>) {#myGallery { height:<?php echo $height_s5_iacf ?> !important; } .jdGallery .slideElement {background-size:cover !important;}}<?php } ?></style>');
 //]]></script>
-<?php }
+<?php } ?>
+
+
+
+
+

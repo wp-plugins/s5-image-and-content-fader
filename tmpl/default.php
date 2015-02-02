@@ -4,6 +4,7 @@
 Author: Shape 5 - Professional Template Community
 Available for download at www.shape5.com
 */
+
 ?>
 
 <?php if ($pretext_s5_iacf != "") { ?>
@@ -17,7 +18,7 @@ Available for download at www.shape5.com
 $br = strtolower($_SERVER['HTTP_USER_AGENT']); // what browser.
 if(strrpos($br,"msie 6") > 1) {
 $iss_ie6_s5_iacf = "yes";
-}
+} 
 else {
 $iss_ie6_s5_iacf = "no";
 }
@@ -28,7 +29,7 @@ $iss_ie6_s5_iacf = "no";
 $br = strtolower($_SERVER['HTTP_USER_AGENT']); // what browser.
 if(strrpos($br,"msie 7") > 1) {
 $iss_ie7_s5_iacf = "yes";
-}
+} 
 else {
 $iss_ie7_s5_iacf = "no";
 }
@@ -38,7 +39,7 @@ $iss_ie7_s5_iacf = "no";
 $br = strtolower($_SERVER['HTTP_USER_AGENT']); // what browser.
 if(strrpos($br,"msie 8") > 1) {
 $iss_ie8_s5_iacf = "yes";
-}
+} 
 else {
 $iss_ie8_s5_iacf = "no";
 }
@@ -49,13 +50,11 @@ echo '<script type="text/javascript">var s5_hidebut = "'.$s5_hidebut.'";</script
 echo '<script type="text/javascript">var s5_hidetext = "'.$s5_hidetext.'";</script>';
 
 ?>
-
-<?php
+	
+<?php 
 
 if ($jslibrary == "mootools") {
-
 	if(true){
-	$template_vertex = "no";
 	if(file_exists(get_theme_root() . '/' . get_template().'/vertex')) {
 	$template_vertex = "yes";
 	}
@@ -68,10 +67,10 @@ if ($jslibrary == "mootools") {
 		//]]></script>
 		<script type="text/javascript">jQuery.noConflict();</script>
 		<?php }
-		if ($s5_thumbnailstretch == "true") {
+		if ($s5_thumbnailstretch == "true") { 
 			echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;;}</style>';
 		}
-
+		
 		echo '<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>';
 		echo '<script type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
 
@@ -82,53 +81,59 @@ if ($jslibrary == "mootools") {
 		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css');?>" rel="stylesheet" type="text/css" media="screen" />');
 	//]]></script>
 
-
-
+		
+		
 			<script type="text/javascript">
 
-
-				function s5_icfstartGallery() {
+			
+				function s5_icfstartGallery() { 
 				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
 				window.myGallery = new gallery(jQuery('#myGallery'), {
 						timed: true,
 						showArrows: <?php echo $s5_hidebut ?>,
 						showCarousel: <?php echo $s5_hidecar ?>,
-						showInfopane: <?php echo $s5_hidetext ?>,
+						showInfopane: <?php echo $s5_hidetext ?>,	
+						slideShowDuration:<?php echo $s5_opacity_time; ?>,
+						slideHideDuration:<?php echo $s5_hide_time; ?>,
+						fadeDuration:<?php echo $s5_hide_time; ?>,						
 						<?php if($s5_hidetext == "truee") {?>
 						textShowCarousel: <?php echo $s5_dropdowntext ?>,
-						<?php } ?>
+						<?php } ?>	
 						delay: <?php echo $s5_delay ?>,
 						<?php if ($jseffect	== "fade") { ?>
 							defaultTransition: "fade"
-						<?php } ?>
+						<?php } ?>	
 						<?php if ($jseffect	== "continuoushorizontal") { ?>
 							defaultTransition: "continuoushorizontal"
-						<?php } ?>
-						<?php if ($jseffect	== "fadeslideleft") { ?>
+						<?php } ?>	
+						<?php if ($jseffect	== "fadeslideleft") { ?>	
 						defaultTransition: "fadeslideleft"
-						<?php } ?>
+						<?php } ?>	
 						<?php if ($jseffect	== "continuousvertical") { ?>
 						defaultTransition: "continuousvertical"
 						<?php } ?>
 					});
-						jQuery('#myGallery').bind('mouseover',function(){window.myGallery.clearTimer();});
+					<?php if ($hoverstopplay == "yes") { ?>
+					jQuery('#myGallery').bind('mouseover',function(){window.myGallery.clearTimer();});
 					jQuery('#myGallery').bind('mouseout',function(){window.myGallery.prepareTimer();});
-			}
-	function s5_icfstartGalleryload() {
-	s5_icfstartGallery();}
-	window.setTimeout(s5_icfstartGalleryload,400);
+					<?php } ?>
+				}
+				function s5_icfstartGalleryload() {
+					s5_icfstartGallery();
+				}
+				window.setTimeout(s5_icfstartGalleryload,400);	
 	</script>
-
+	
 		<?php if ($s5_verticalhorizontal == "true") { ?>
-	<style>
+	<style>	
 		.jdGallery .carousel .carouselWrapper, .jdExtCarousel .carouselWrapper, .jdGallery .carousel, .jdGallery div.carouselContainer {height:<?php echo $height_s5_iacf ?>;}
 	</style>
 	<?php } ?>
-
-	<?php
-	}else{
-
-		if ($s5_thumbnailstretch == "true") {
+	
+	<?php			
+	}else{	 
+	
+		if ($s5_thumbnailstretch == "true") { 
 			echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;}</style>';
 		}
 
@@ -145,51 +150,60 @@ if ($jslibrary == "mootools") {
 		document.write('<link href="<?php echo $this->check_override('css/s5imagecontent.css');?>" rel="stylesheet" type="text/css" media="screen" />');
 	//]]></script>
 		<script>
+		
+			
+		<script type="text/javascript">
 
-
-		function s5_icfstartGallery() {
+			
+				function s5_icfstartGallery() { 
 				document.getElementById("s5_iacf_content_wrap").style.display = 'block';
-				window.myGallery = new gallery($('myGallery'), {
+				window.myGallery = new gallery(jQuery('#myGallery'), {
 						timed: true,
 						showArrows: <?php echo $s5_hidebut ?>,
 						showCarousel: <?php echo $s5_hidecar ?>,
-						showInfopane: <?php echo $s5_hidetext ?>,
+						showInfopane: <?php echo $s5_hidetext ?>,	
+						slideShowDuration:<?php echo $s5_opacity_time; ?>,
+						slideHideDuration:<?php echo $s5_hide_time; ?>,
+						fadeDuration:<?php echo $s5_hide_time; ?>,						
 						<?php if($s5_hidetext == "truee") {?>
 						textShowCarousel: <?php echo $s5_dropdowntext ?>,
-						<?php } ?>
+						<?php } ?>	
 						delay: <?php echo $s5_delay ?>,
 						<?php if ($jseffect	== "fade") { ?>
 							defaultTransition: "fade"
-						<?php } ?>
+						<?php } ?>	
 						<?php if ($jseffect	== "continuoushorizontal") { ?>
 							defaultTransition: "continuoushorizontal"
-						<?php } ?>
-						<?php if ($jseffect	== "fadeslideleft") { ?>
+						<?php } ?>	
+						<?php if ($jseffect	== "fadeslideleft") { ?>	
 						defaultTransition: "fadeslideleft"
-						<?php } ?>
+						<?php } ?>	
 						<?php if ($jseffect	== "continuousvertical") { ?>
 						defaultTransition: "continuousvertical"
 						<?php } ?>
 					});
+					<?php if ($hoverstopplay == "yes") { ?>
 					$('myGallery').addEvent('mouseover',function(){window.myGallery.clearTimer();});
 					$('myGallery').addEvent('mouseout',function(){window.myGallery.prepareTimer();});
-			}
-	function s5_icfstartGalleryload() {
-	s5_icfstartGallery();}
-	window.setTimeout(s5_icfstartGalleryload,400);
+					<?php } ?>
+				}
+				function s5_icfstartGalleryload() {
+					s5_icfstartGallery();
+				}
+				window.setTimeout(s5_icfstartGalleryload,400);	
 	</script>
-
-
+	
+	
 	<?php if ($s5_verticalhorizontal == "true") { ?>
-	<style>
+	<style>	
 		.jdGallery .carousel .carouselWrapper, .jdExtCarousel .carouselWrapper, .jdGallery .carousel, .jdGallery div.carouselContainer {height:<?php echo $height_s5_iacf ?>;}
 	</style>
 	<?php } ?>
+	
 
-
-	<?php } if($height_s5_iacf == '100%'){$height_s5_iacf = '103%';}?>
+	<?php } ?>
 		<div class="content <?php if ($s5_verticalhorizontal == "true") { ?>s5vertical<?php } ?>" style="position:relative;z-index:0">
-			<div id="myGallery" style="<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;">
+			<div id="myGallery" style="background:#<?php echo $background_s5_iacf ?>;<?php if ($s5stretchimage != "stretch") { ?>height:<?php echo $height_s5_iacf ?>;<?php } ?>width:<?php echo $width_s5_iacf ?>;">
 			<?php if ($s5stretchimage == "stretch") { ?>
 				<div id="myGallery_height">
 					<img id="myGallery_height_img" alt="" src="<?php echo $picture1_s5_iacf; ?>" />
@@ -203,7 +217,7 @@ if ($jslibrary == "mootools") {
 					<a href="<?php if ($picture1link_s5_iacf != "") {echo $picture1link_s5_iacf;} else { echo "javascript:;";}?>" title="open image" class="open"></a>
 					<img src="<?php echo $picture1_s5_iacf ?>" alt="<?php echo $title1 ?>" class="full" />
 					<img src="<?php echo $picture1_s5_iacf ?>" alt="<?php echo $title1 ?>" class="thumbnail" />
-
+					
 				</div>
 				<?php } ?>
 				<?php if ($picture2_s5_iacf != "") { ?>
@@ -291,12 +305,12 @@ if ($jslibrary == "mootools") {
 			</div>
 		</div>
 <?php } ?>
+	
 
 
-
-
-<?php if ($jslibrary == "s5effects") { ?>
-
+	
+<?php if ($jslibrary == "s5effects") { ?>		
+	
 <div style="z-index:0;position: relative; overflow: hidden; height: <?php echo $height_s5_iacf ?>">
 
 <div id="s5_iacf_outer" style="z-index:1;position: relative; max-height:<?php echo $height_s5_iacf ?>; max-width:<?php echo $width_s5_iacf ?>; overflow:hidden; background:#<?php echo $background_s5_iacf ?>">

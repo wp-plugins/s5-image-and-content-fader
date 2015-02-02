@@ -25,15 +25,16 @@ window.gallery.Transitions.fadeslideleft= function(/*oldFx, newFx, oldPos, newPo
 		newPos=arguments[0][3];
 		oldFx.options.easing = newFx.options.easing = 'easeOutCubic';
 		oldFx.options.duration = newFx.options.duration = 1500;
+		oldFx.options.queue= newFx.options.queue= false;
 		if (newPos > oldPos)
 		{
-			newFx.css({'left':this.galleryElement.outerWidth()}).start({
+			newFx.css({'left':this.galleryElement.outerWidth()},{duration:window.gallery.options.slideShowDuration}).start({
 				left: /*[[this.galleryElement.outerWidth(),*/ 0,//]
 				opacity: 1
 			});
-			oldFx.css({'opacity':1}).start({opacity: 0});
+			oldFx.css({'opacity':1},{duration:window.gallery.options.slideHideDuration}).start({opacity: 0});
 		} else {
-			newFx.css({'opacity':0}).start({opacity: 1});
+			newFx.css({'opacity':0},{duration:window.gallery.options.slideShowDuration}).start({opacity: 1});
 			oldFx.completefunc(function(fx){fx.css({left: 0});}.passx(oldFx)).css({'left':0}).start({
 				left: /*[0, */this.galleryElement.outerWidth(),//],
 				opacity: 0
@@ -46,6 +47,8 @@ window.gallery.Transitions.fadeslideleft= function(/*oldFx, newFx, oldPos, newPo
 		oldPos=arguments[0][2];
 		newPos=arguments[0][3];
 		oldFx.options.easing = newFx.options.easing = 'linear';
+		oldFx.options.queue= newFx.options.queue= false;
+		console.log(this);
 		if (
 			((newPos > oldPos) || ((newPos==0) && (oldPos == (this.maxIter-1) ))) &&
 			(!((newPos == (this.maxIter-1 )) && (oldPos == 0)))
@@ -98,4 +101,3 @@ window.gallery.Transitions.fadeslideleft= function(/*oldFx, newFx, oldPos, newPo
 			});
 		}
 	}
-

@@ -69,6 +69,12 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.1.0
+
+ - Added more timing options
+ - Added option to have image rotation pause on hover
+ - Improved compatibility with multibox in Shape 5 themes.
+
 3.0.7
 
  - Fixed javascript typo
