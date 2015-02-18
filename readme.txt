@@ -69,6 +69,10 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.1.2
+
+ - Revert jQuery changes.
+
 3.1.1
 
  - jQuery enqueue timing adjustment.
