@@ -67,10 +67,8 @@ if ($jslibrary == "mootools") {
 		//]]></script>
 		<script type="text/javascript">jQuery.noConflict();</script>
 		<?php }
-		if ($s5_thumbnailstretch == "true") { 
-			echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;;}</style>';
-		}
-		
+		if ($s5_thumbnailstretch == "true") {echo '<style>.carouselInner .thumbnail {background-size: 100% 100% !important;;}</style>';	}
+		if ($s5_hidefaderimages == "yes") { echo '<style>.jdGallery .slideElement {background:none !important;}</style>'; }
 		echo '<script type="text/javascript">var s5_slide_opacity='.$s5_slide_opacity.'</script>';
 		echo '<script type="text/javascript">var s5_verticalhorizontal = "'.$s5_verticalhorizontal.'";</script>';
 
@@ -121,7 +119,11 @@ if ($jslibrary == "mootools") {
 				function s5_icfstartGalleryload() {
 					s5_icfstartGallery();
 				}
-				window.setTimeout(s5_icfstartGalleryload,400);	
+				window.setTimeout(s5_icfstartGalleryload,400);
+        <?php if ($fullscreenheight == "yes") { ?>
+        jQuery( document ).ready(function() { var s5_custom23winhght2 = jQuery( window ).height(); jQuery('#myGallery').css("height", s5_custom23winhght2); });					
+        jQuery( window ).resize(function() { var s5_custom23winhght2 = jQuery( window ).height(); jQuery('#myGallery').css("height", s5_custom23winhght2); });
+        <?php } ?>
 	</script>
 	
 		<?php if ($s5_verticalhorizontal == "true") { ?>

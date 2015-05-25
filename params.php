@@ -11,10 +11,10 @@ $s5stretchimage = "";
 $s5_thumbnailstretch = "";
 $s5pixelwidth = "";
 $hoverstopplay = "yes";
+$fullscreenheight = "no";
+$s5_hidefaderimages= "no";
 
 echo '<script language="javascript" type="text/javascript">var s5_verticalhorizontal = "null";</script>';
-
-
 
 $jslibrary = $this->get( 'jslibrary' );
 $s5_dropdowntext = $this->get( 's5_dropdowntext' );
@@ -74,7 +74,8 @@ $display_time_s5_iacf   	= "10";
 $s5stretchimage = $this->get( 's5stretchimage' );
 $s5pixelwidth = $this->get( 's5pixelwidth' );
 $hoverstopplay = $this->get( 'hoverstopplay' );
-
+$fullscreenheight = $this->get( 'fullscreenheight' );
+$s5_hidefaderimages = $this->get( 's5_hidefaderimages' );
 
 $title1	= $this->get( 'title1' );
 $title2	= $this->get( 'title2' );

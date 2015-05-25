@@ -19,6 +19,15 @@
 					<option value="actualsize">Actual Size</option>
 					<option value="stretch">Stretch to Fit</option>
 				</field>
+				<field name="fullscreenheight" type="radio" default="no" label="Enable Full Screen Height?" description="If you choose full screen height the widget will calculate your visible vertical screen height and set the widget to this height.  This is useful for websites that you desire the widget to take up the entire screen with logo and menu on top of the widget.">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</field>
+				
+				<field name="s5_hidefaderimages" type="radio" default="no" label="Disable Fader Images and Just Show Text?" description="If you choose to disable the images the text for each slide will still show.  This is useful if you just want to put the fader on a fixed backgroud like we did in our Zoka Transports design.">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</field>
 				<field name="s5pixelwidth" type="text" default="0px" label="If Stretch to Fit is enabled: Enter in the width in pixels to disable stretching, ex 800px" description="If you are using a responsive style website you can enter in a max width here so your images will no longer stretch once the browser is shrunken to the specified width. If the browser size meets the specified width the height of the widget will become the specified height parameter as well. To disable this function simply enter 0px" />    
 				
 				<field name="background" type="text" default="" label="Background Color (leave blank for none) ex:FFFFFF" description="Enter the background color. Leave blank for none. This color shows behind the widget and only shows when the images are still loading. After the images are loaded they appear over this color." />    
