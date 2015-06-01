@@ -69,6 +69,11 @@ A: Support is free, but we require a (free) signup here http://www.shape5.com/jo
 
 == Changelog ==
 
+3.2.1
+
+ - Adjustment to wording of settings fields to improve readability.
+
+
 3.2.0
 
  - Added "Full Screen Height" option
